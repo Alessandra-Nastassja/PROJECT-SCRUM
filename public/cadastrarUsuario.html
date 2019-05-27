@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+
+    <title>Criar conta</title>
+
+    <!-- Intregração com o Facebook -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+    
+    <!-- Validação -->
+    <script src="http://localhost:8000/js/cadastrarUsuario.js"></script>
+
+    <!-- Mascara de e-mail -->
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+          <div class="form-inline my-2 my-lg-0">
+            <span class="navbar-text pr-3">
+              <a href="/usuario">Cadastrar</a>
+            </span>
+            <span class="navbar-text">
+              <a href="/usuario/login">Login</a>
+            </span>
+          </div>
+        </div>
+      </nav>
+    <div class="container" style="margin-top: 50px;">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="notificacao">
+            <span id="msgNotificacao">Usuário salvo com sucesso!</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <h1>Criar conta</h1>
+        <br>
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nome completo</label>
+                <input type="text" class="form-control" id="nome" placeholder="Digite seu nome">
+                <small class="form-text text-muted">Ex: Alessandra Nastassja</small>
+                <div class="invalid-feedback">
+                    Preencha corretamente
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">E-mail</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Digite seu e-mail">
+                <small class="form-text text-muted">Ex: alessandra.nastassja@dominio.com</small>
+                <div class="invalid-feedback">
+                    Preencha corretamente
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Confirmar e-mail</label>
+                <input type="email" class="form-control" id="emailConfirmar" aria-describedby="emailHelp" placeholder="Digite seu e-mail para confirmar">
+                <small class="form-text text-muted">Ex: alessandra.nastassja@dominio.com</small>
+                <div class="invalid-feedback">
+                    Preencha corretamente
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
+                <small class="form-text text-muted">Ex: alessandra123, @1l21l233dr1, alessandra</small>
+                <div class="invalid-feedback">
+                    Preencha corretamente
+                </div>
+            </div>
+            <input type="button" class="btn btn-success btn-lg" id="cadastrar" value="Cadastrar">
+            <br><br>
+            <a id="facebook-button"><i class="fab fa-facebook-square"></i> Entrar com o Facebook</a>
+        </form>
+        <hr>
+        <a href="/usuario/login">Faça seu login</a>
+    </div>
+    <script>
+        $('#facebook-button').on('click', function () {
+
+            OAuth.initialize('HwAr2OtSxRgEEnO2-JnYjsuA3tc');
+
+            OAuth.popup('facebook').then(facebook => {
+                console.log('facebook:', facebook);
+
+                facebook.me().then(data => {
+                    console.log('me data:', data);
+
+                    $("#nome").val(data.name);
+                    $("#email").val(data.email);
+                    $("#emailConfirmar").val(data.email);
+                    // $("#senha").val(facebook.access_token);
+
+                    $("#senha").focus()
+                    $(".alert").removeClass("alert-success");
+                    $(".alert").addClass("alert-warning");
+                    $("#msgNotificacao").text('Cadastre uma senha válida');
+                    $("#notificacao").show();
+                });
+            });
+        })
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
