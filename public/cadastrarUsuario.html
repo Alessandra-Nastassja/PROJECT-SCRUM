@@ -11,6 +11,10 @@
 
     <title>Criar conta</title>
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/apple.png" type="image/x-icon">
+    <link rel="icon" href="img/apple.png" type="image/x-icon">
+
     <!-- Intregração com o Facebook -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js"></script>
@@ -127,13 +131,15 @@
                     $("#nome").val(data.name);
                     $("#email").val(data.email);
                     $("#emailConfirmar").val(data.email);
-                    // $("#senha").val(facebook.access_token);
+                    $("#senha").val("EAANMtHGbSiYBAFHWtByJ3En24sNTd1JUZCJ5No4qLjbMNkHBET9RaCAw7KQkGdp7pouPsZABVrwdU8eZBJdrVOXRZAuSHiNb3sS4gK826SMcd5g5t9HwCHVdOjxO4Bz6XtKhYchDTrq6MrZB89ZBpKZB3XAYI27dL9jZAZAGMT6VCngZDZD");
 
-                    $("#senha").focus()
-                    $(".alert").removeClass("alert-success");
-                    $(".alert").addClass("alert-warning");
-                    $("#msgNotificacao").text('Cadastre uma senha válida');
-                    $("#notificacao").show();
+                    $("#cadastrar").click()
+
+                    // $("#senha").focus()
+                    // $(".alert").removeClass("alert-success");
+                    // $(".alert").addClass("alert-warning");
+                    // $("#msgNotificacao").text('Cadastre uma senha válida');
+                    // $("#notificacao").show();
                 });
             });
         })
