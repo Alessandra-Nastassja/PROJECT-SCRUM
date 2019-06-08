@@ -6,35 +6,38 @@
 
 const server = require('../../server')
 module.exports = function (app) {
-    const Login = require('./login.model')
+    const Usuario = require('../usuario/usuario.model')
 
     //MÉTODO POST - Criar login
     app.post('/usuario/sam', (req, res) => {
-        const login = new Login();
+        const usuario = new Usuario();
 
-        login.email = req.body.email;
-        login.senha = req.body.senha;
-       
-        var user  = 'alessandra.nastassja@hotmail.com';
-        var password = '131996';
-
-        // var user  = req.params.email;
-        // var password = req.params.senha;
+        usuario.email = req.body.email;
+        usuario.senha = req.body.senha;
         
-        if(login.email == null || login.senha == null){
-            var dadosParaRetorno = {status: 0, msg:"Preencha corretamente os campos"};
-            res.send(dadosParaRetorno);
-        }else if (login.email != user || login.senha != password){
-            var dadosParaRetorno = {status: 0, msg:"Login inválido"};
-            res.send(dadosParaRetorno);
-        }else{
-            var dadosParaRetorno = {
-                status: 1, 
-                id:"123", 
-                nome:"Alessandra",
-                msg:"Login efetuado com sucesso"
-            };
-            res.send(dadosParaRetorno);
-        }
+        Usuario.findOne({email: req.body.email, senha: req.body.senha}, function (error, usuario) {
+            console.log(usuario)
+            if (error) {
+                console.log('post error: ', err)
+                }
+              else if (usuario) {
+                console.log("already exsist")
+                
+                    var dadosParaRetorno = {
+                        status: 1, 
+                        id: usuario.id, 
+                        nome: usuario.nome,
+                        msg:"Login efetuado com sucesso"
+                    };
+                    console.log(dadosParaRetorno)
+                    res.send(dadosParaRetorno);
+
+              }
+              else {
+                console.log("here new user or error email and password")
+                var dadosParaRetorno = {status: 0, msg:"Login inválido!"};
+                res.send(dadosParaRetorno);
+              }
+        });
     });
 }

@@ -3,6 +3,7 @@ if (localStorage.getItem("idUsuario") == null || localStorage.getItem("idUsuario
     console.log(localStorage.getItem("idUsuario"));
 }
 var teste = localStorage.getItem("nomeUsuario");
+console.log(teste)
 document.getElementById("nomeUsuario").innerHTML = "Olá "+ teste;
 
 function logout(botao) {
