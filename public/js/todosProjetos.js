@@ -88,6 +88,7 @@ function carregarTodos() {
     $.get("http://localhost:8000/projeto/todosProjetos", function (data, status) {
         for (i = 0; i < data.length; i++) {
             $("#tabela").append("<tr><td>" + data[i].nome + "</td><td>" + "R$ " + data[i].preco + "</td><td>" + data[i].descricao + "</td><td><button type='button' class='btn btn-primary' onclick='editarRegistro(&quot;" + data[i]._id + "&quot;)'>Editar</button></td><td><button type='button' class='btn btn-danger' onclick='deletarRegistro(&quot;" + data[i]._id + "&quot;)'>Deletar</button></td></tr>");
+            // $("#tabela").append("<tr><td><a href='/projeto/gestao' onclick='projeto(&quot;" + data[i]._id + "&quot;)'>"+ data[i].nome + "</a></td>" + "</td><td>" + "R$ " + data[i].preco + "</td><td>" + data[i].descricao + "</td><td><button type='button' class='btn btn-primary' onclick='editarRegistro(&quot;" + data[i]._id + "&quot;)'>Editar</button></td><td><button type='button' class='btn btn-danger' onclick='deletarRegistro(&quot;" + data[i]._id + "&quot;)'>Deletar</button></td></tr>");
         }
     });
 }

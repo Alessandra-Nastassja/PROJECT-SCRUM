@@ -17,6 +17,7 @@ const Schema = mongoose.Schema;
 */
 
 const ProjetoSchema = new Schema({
+   idBoard: String,
    nome: String,
    preco: String,
    descricao: String

@@ -11,6 +11,10 @@
 
     <title>Cadastrar projeto</title>
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/apple.png" type="image/x-icon">
+    <link rel="icon" href="img/apple.png" type="image/x-icon">
+
     <!-- Validação -->
     <script src="../bootstrap/jquery-3.3.1.min.js"></script>
     <script src="http://localhost:8000/js/cadastrarProjeto.js"></script>
@@ -37,6 +41,8 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/projeto">Cadastrar novo</a>
                         <a class="dropdown-item" href="/projeto/lista">Lista de projetos</a>
+                        <!-- <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/projeto/gestao">Gestão e controle do projeto</a> -->
                     </div>
                 </li>
             </ul>
@@ -73,7 +79,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">Preço</label>
+                <label for="exampleInputEmail1">Recurso financeiro</label>
                 <input type="text" class="form-control dinheiro" id="preco" placeholder="Digite o preço" name="preco"
                     required>
                 <small class="form-text text-muted">Ex: 1000, 1526, 250</small>
