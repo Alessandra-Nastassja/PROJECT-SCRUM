@@ -4,7 +4,7 @@ if (localStorage.getItem("idUsuario") == null || localStorage.getItem("idUsuario
 }
 var teste = localStorage.getItem("nomeUsuario");
 console.log(teste)
-document.getElementById("nomeUsuario").innerHTML = "Olá "+ teste;
+document.getElementById("nomeUsuario").appendChild(localStorage.getItem("nomeUsuario"));
 
 function logout(botao) {
     localStorage.clear();
