@@ -83,17 +83,36 @@ module.exports = function (app) {
             if (error)
                 res.send('Error ao tentar selecionar um projeto por id: ' + error);
 
-            projeto.nome = req.body.nome;
-            projeto.preco = req.body.preco;
-            projeto.descricao = req.body.descricao;
+            console.log(error);
+            console.log(projeto.idBoard);
+            
+            var options = {
+                method: 'PUT',
+                url: 'https://api.trello.com/1/boards/' + projeto.idBoard,
+                qs: {
+                    name: req.body.nome,
+                    desc: req.body.descricao,
+                    key: 'df22892153ab2e56c8d4b32e164e86d1',
+                    token: '9846a71bbeafd8ed055ca25d32e47e3bb006cc4a46508e8962dbd6d5194a294c'
+                  }
+              };
 
-            projeto.save(function (error) {
-                if (error)
-                    res.send('Error ao tentar atualizar o projeto: ' + error);
+              request(options, function (error, response, body) {
+                if (error) throw new Error(error);
+              
+                console.log(body);
 
-                res.json({ message: 'Projeto atualizado com sucesso' });
-            })
+                projeto.nome = req.body.nome;
+                projeto.preco = req.body.preco;
+                projeto.descricao = req.body.descricao;
 
+                projeto.save(function (error) {
+                    if (error)
+                        res.send('Error ao tentar atualizar o projeto: ' + error);
+
+                    res.json({ message: 'Projeto atualizado com sucesso' });
+                })
+              });
         });
     })
     //MÉTODO DELETE - Deletar por ID
