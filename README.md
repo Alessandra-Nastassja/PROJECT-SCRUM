@@ -1,4 +1,3 @@
-![]()
 # PROJETO-ORIENTACAO-SERVICO
 The goal is to create the system manager project using a Trello tool and Node JS.
 
@@ -14,6 +13,13 @@ The goal is to create the system manager project using a Trello tool and Node JS
 
 - [Node Js]()
 - [Mongo DB]()
+- [Trello]()
+
+### Protótipo:
+![](https://user-images.githubusercontent.com/27302446/81488112-ef5f9a80-923a-11ea-9f19-434fc48e3a5e.png)
+
+### BPNM:
+![](https://user-images.githubusercontent.com/27302446/81488054-56c91a80-923a-11ea-93bc-46a4364119ab.png)
 
 ### Prerequisites:
 
